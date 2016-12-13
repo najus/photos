@@ -1,0 +1,46 @@
+<script src="js/blueimp-gallery.js"></script>
+<script src="js/imagesloaded.pkgd.min.js"></script>
+<script src="js/jquery.blueimp-gallery.js"></script>
+<script src="js/bootstrap-image-gallery.js"></script>
+<script src="js/flickr-jquery.js"></script>
+<script>
+    $(function() {
+
+        if (location.hash.slice(1) != "") {
+
+            $('.spinner-wrapper').show();
+            $('.gallery-container').empty();
+            $("#" + location.hash.slice(1)).toggleClass("sidebar-selected")
+            $('.gallery').flickr({
+                apiKey: '69b2be122a9b287e85d377673edef6e6',
+                photosetId: $("#" + location.hash.slice(1)).data("id"),
+                loadingSpeed: 20
+            });
+            $.extend(blueimp.Gallery.prototype.options, {
+                useBootstrapModal: false,
+                hidePageScrollbars: false
+            });
+        } else {
+
+        }
+    });
+
+    $(window).on('hashchange', function() {
+        if (location.hash.slice(1) != "") {
+            $('.spinner-wrapper').show();
+            $('.gallery-container').empty();
+            $('.cat-link').removeClass("sidebar-selected")
+            $("#" + location.hash.slice(1)).toggleClass("sidebar-selected")
+            $('.gallery').flickr({
+                apiKey: '69b2be122a9b287e85d377673edef6e6',
+                photosetId: $("#" + location.hash.slice(1)).data("id"),
+                loadingSpeed: 20
+            });
+            $.extend(blueimp.Gallery.prototype.options, {
+                useBootstrapModal: false,
+                hidePageScrollbars: false
+            });
+        }
+
+    });
+</script>

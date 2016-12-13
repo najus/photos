@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Sujan Thapa - Portfolio</title>
+    <link rel="stylesheet" href="css/blueimp-gallery.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-image-gallery.css">
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        
+<div id="sidebar-wrapper">
+<aside class="sidebar-left-collapse sidebar-wrapper">
+	<p class="head"><a href="">Sujan Thapa</a></p>
+    <div class="sidebar-links">
+
+        <div class="link-blue">
+            <a>
+                <i class="fa fa-picture-o"></i>Photography
+            </a>
+            <ul class="sub-links">
+                
+                <li><a id="Miscellaneous" class="cat-link" href="portfolio#Miscellaneous" data-id="72157673898069703">Miscellaneous</a></li>
+                
+            </ul>
+        </div>
+        <div class="link-green">
+            <a>
+                <i class="fa fa-map-marker"></i>Other Places
+            </a>
+            <ul class="sub-links">
+                
+                <li><a href="http://thapasujan.com"><i class="fa fa-home"></i> Personal Page</a></li>
+                
+                <li><a href="http://twitter.com/najus"><i class="fa fa-twitter"></i> Twitter</a></li>
+                
+                <li><a href="http://www.flickr.com/photos/sujanthapa/"><i class="fa fa-flickr"></i> Flickr</a></li>
+                
+                <li><a href="http://instagram.com/najusujan"><i class="fa fa-instagram"></i> Instagram</a></li>
+                
+
+            </ul>
+        </div>
+    </div>
+</aside>
+</div>
+
+        <div id="page-content-wrapper">
+            <a href="#menu-toggle" id="nav-toggle"><span></span></a> <div class="gallery" data-id="">
+    <div class="row">
+        <div class="col-md-12 spinner-wrapper">
+            <div class="spinner moon"></div>
+        </div>
+        <div class="gallery-container col-md-12"></div>
+    </div>
+</div>
+
+
+
+        </div>
+    </div>
+    <footer class="site-footer">
+  <!-- Blueimp gallery -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script>
+    $("#nav-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        this.classList.toggle( "active" );
+    });
+  </script>
+
+</footer>
+ 
+ <script src="js/blueimp-gallery.js"></script>
+<script src="js/imagesloaded.pkgd.min.js"></script>
+<script src="js/jquery.blueimp-gallery.js"></script>
+<script src="js/bootstrap-image-gallery.js"></script>
+<script src="js/flickr-jquery.js"></script>
+<script>
+    $(function() {
+
+        if (location.hash.slice(1) != "") {
+
+            $('.spinner-wrapper').show();
+            $('.gallery-container').empty();
+            $("#" + location.hash.slice(1)).toggleClass("sidebar-selected")
+            $('.gallery').flickr({
+                apiKey: '69b2be122a9b287e85d377673edef6e6',
+                photosetId: $("#" + location.hash.slice(1)).data("id"),
+                loadingSpeed: 20
+            });
+            $.extend(blueimp.Gallery.prototype.options, {
+                useBootstrapModal: false,
+                hidePageScrollbars: false
+            });
+        } else {
+
+        }
+    });
+
+    $(window).on('hashchange', function() {
+        if (location.hash.slice(1) != "") {
+            $('.spinner-wrapper').show();
+            $('.gallery-container').empty();
+            $('.cat-link').removeClass("sidebar-selected")
+            $("#" + location.hash.slice(1)).toggleClass("sidebar-selected")
+            $('.gallery').flickr({
+                apiKey: '69b2be122a9b287e85d377673edef6e6',
+                photosetId: $("#" + location.hash.slice(1)).data("id"),
+                loadingSpeed: 20
+            });
+            $.extend(blueimp.Gallery.prototype.options, {
+                useBootstrapModal: false,
+                hidePageScrollbars: false
+            });
+        }
+
+    });
+</script>
+</body>
+
+</html>
