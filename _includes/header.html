@@ -10,7 +10,7 @@
             </a>
             <ul class="sub-links">
                 {% for cat in site.data.photography %}
-                <li><a id="{{ cat.name }}" class="cat-link" href="portfolio#{{ cat.name }}" data-id="{{ cat.key }}">{{ cat.name }}</a></li>
+                <li><a id="{{ cat.name }}" class="cat-link" href="#{{ cat.name }}" data-id="{{ cat.key }}">{{ cat.name }}</a></li>
                 {% endfor %}
             </ul>
         </div>
