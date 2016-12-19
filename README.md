@@ -30,4 +30,4 @@ Portfolio pages are based on Flickr collections. To modify it you just need to c
 
 ## Demo & Personal Use
 
-Here it is: [**To the demo!**](http://jpdias.me/portfolio-photo/)
+Here it is: [**To the demo!**](http://photos.thapasujan.com/)
