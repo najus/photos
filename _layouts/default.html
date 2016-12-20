@@ -8,14 +8,16 @@
     <div id="wrapper">
         {% include header.html %}
         <div id="page-content-wrapper">
-            <a href="#menu-toggle" id="nav-toggle"><span></span></a> 
-            
+            <a href="#menu-toggle" id="nav-toggle"><span></span></a>
+
             {{ content }}
 
         </div>
     </div>
     {% include footer.html %}
-
+    {% if jekyll.environment == 'production' %}
+    {% include analytics.html %}
+    {% endif %}
 </body>
 
 </html>
