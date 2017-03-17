@@ -9,4 +9,7 @@
   url: http://www.flickr.com/photos/sujanthapa/
 - name: Instagram
   favicon: fa-instagram
-  url: http://instagram.com/najusujan
+  url: http://instagram.com/najusphoto
+- name: 500px
+  favicon: fa-500px
+  url: https://500px.com/najus
