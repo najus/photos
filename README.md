@@ -1,33 +1,35 @@
-# portfolio-photo
-:camera: Jekyll based portfolio using Flickr API.
+# photos.sujanthapa.com
 
-#DISCLAIMER
+Static photo gallery. **Flickr is the source of truth** — the site is
+generated from Flickr at build time; nothing calls the Flickr API when
+someone visits a page, and no API key is shipped to visitors.
 
-**This is work in progress**
+## How it works
 
-## How is it built?
+- Upload / organise photos on Flickr as usual (albums = galleries here).
+- `tools/build.py` fetches every album, photo, size and EXIF via the
+  Flickr API and regenerates the whole site: `index.html`,
+  `albums/<slug>/`, `photos/<slug>/` (one page per photo),
+  `data/photos.json`, `sitemap.xml`.
+- A GitHub Action (`.github/workflows/refresh.yml`) does this weekly
+  and on demand, committing only when Flickr changed. It needs one repo
+  secret: `FLICKR_API_KEY` (the public read-only Flickr API key).
+- GitHub Pages serves the result at photos.sujanthapa.com (see `CNAME`).
+  `.nojekyll` — this is no longer a Jekyll site.
 
-This portfolio is based on [Jekyll](https://jekyllrb.com/). Please read the [docs](https://jekyllrb.com/docs/home/).
-Hosted freely on [GitHub pages](https://pages.github.com/).
+## Run it locally
 
-## How to configure
+```sh
+FLICKR_API_KEY=xxxx python3 tools/build.py
+python3 -m http.server   # preview at http://localhost:8000
+```
 
-All *personal* content is configurable by modifing the `.yaml` files in the `_data` folder.
+New Flickr albums are picked up automatically (slug = slugified
+title). The four long-standing albums keep their existing slugs.
 
-Portfolio pages are based on Flickr collections. To modify it you just need to change the `photography.yaml` accordingly. 
-- `name`: Name of the set/page.
-- `key`: ID of the Flickr collection (appears on the URL).
+## Layout
 
-**Other Places** sidebar section is configurable in the `links.yaml` by:
-- `name`: URL Title
-- `favicon`: font-awesome representative icon. ([Icon List](https://fortawesome.github.io/Font-Awesome/icons/))
-- `url`: URL
-
-**Homepage** is configurable in the `homepage.yaml` by:
-- `quote`: The quote of your choice.
-- `author`: The author of the quote.
-- `background`: The background image for your front page.
-
-## Demo & Personal Use
-
-Here it is: [**To the demo!**](http://photos.thapasujan.com/)
+- `tools/build.py` — the generator (the only code that matters)
+- `assets/` — hand-written CSS + lightbox JS
+- Everything else at the root is generated output — don't hand-edit it;
+  change the generator or Flickr instead.

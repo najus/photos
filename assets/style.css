@@ -1,0 +1,59 @@
+/* photos.sujanthapa.com — plain static, matches sujanthapa.com's quiet fog palette */
+:root{
+  --bg:#f5f5f2; --ink:#1c1f1c; --muted:#6b716b; --line:#e2e3de;
+  --accent:#2f4d3a; --card:#fff;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.55 -apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+img{display:block;max-width:100%}
+.site-header{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;
+  max-width:1200px;margin:0 auto;padding:1.1rem 1.25rem}
+.brand{font-weight:650;color:var(--ink);font-size:1.05rem}
+.brand span{color:var(--muted);font-weight:400}
+.site-header nav{display:flex;gap:1.1rem;font-size:.92rem}
+.site-header nav a{color:var(--muted)}
+.site-header nav a:hover{color:var(--ink)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 1.25rem 2rem}
+h1{font-size:2rem;font-weight:650;letter-spacing:-.02em;margin:.3rem 0 .2rem}
+h2{font-size:1.15rem;font-weight:650;letter-spacing:-.01em;margin:2rem 0 1rem}
+.sub,.crumb{color:var(--muted);font-size:.92rem}
+.crumb{margin-top:1rem}
+.hero{position:relative;max-width:1200px;margin:0 auto;padding:0 1.25rem}
+.hero img{width:100%;height:min(62vh,560px);object-fit:cover;border-radius:10px}
+.hero-text{position:absolute;left:2.2rem;bottom:1.4rem;color:#fff;text-shadow:0 1px 14px rgba(0,0,0,.45)}
+.hero-text h1{font-size:2.6rem;margin:0}
+.hero-text p{margin:.2rem 0 0;opacity:.92}
+.album-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.album-card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;color:var(--ink)}
+.album-card:hover{text-decoration:none;border-color:#c9cbc4}
+.album-card img{width:100%;aspect-ratio:4/3;object-fit:cover;height:auto}
+.album-meta{display:flex;justify-content:space-between;align-items:baseline;padding:.7rem .9rem}
+.album-meta em{color:var(--muted);font-style:normal;font-size:.85rem}
+.grid{columns:3 300px;column-gap:1rem}
+.cell{break-inside:avoid;margin:0 0 1rem;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.cell img{width:100%;height:auto}
+.cell figcaption{padding:.55rem .8rem;font-size:.88rem;color:var(--muted)}
+.photo-page .full{width:100%;height:auto;border-radius:10px}
+.desc{max-width:65ch}
+.exif{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.6rem 1.5rem;max-width:800px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1rem 0;margin:1.5rem 0}
+.exif dt{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.exif dd{margin:.1rem 0 0}
+.prevnext{display:flex;justify-content:space-between;gap:1rem;margin-top:2rem}
+.prevnext .next{margin-left:auto}
+.site-footer{max-width:1200px;margin:2rem auto 0;padding:1.5rem 1.25rem 2.5rem;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.88rem}
+.lightbox{position:fixed;inset:0;background:rgba(12,14,12,.94);z-index:50;display:flex;align-items:center;justify-content:center}
+.lightbox[hidden]{display:none}
+.lightbox figure{margin:0;max-width:92vw;text-align:center}
+.lightbox img{max-width:92vw;max-height:86vh;width:auto;height:auto;margin:0 auto;border-radius:4px}
+.lightbox figcaption{color:#eee;margin-top:.7rem;font-size:.92rem}
+.lightbox button{position:absolute;background:none;border:0;color:#fff;font-size:2.2rem;cursor:pointer;padding:.5rem 1rem;line-height:1}
+.lb-close{top:.6rem;right:.8rem}
+.lb-prev{left:.4rem;top:50%;transform:translateY(-50%)}
+.lb-next{right:.4rem;top:50%;transform:translateY(-50%)}
+@media (max-width:640px){.hero-text{left:1.6rem}.hero-text h1{font-size:2rem}}
