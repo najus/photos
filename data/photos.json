@@ -1324,9 +1324,13 @@
      "srcset": "https://live.staticflickr.com/300/31532628864_e896416af1_n.jpg 320w, https://live.staticflickr.com/300/31532628864_e896416af1.jpg 500w, https://live.staticflickr.com/300/31532628864_e896416af1_z.jpg 640w, https://live.staticflickr.com/300/31532628864_e896416af1_b.jpg 1024w",
      "flickr_url": "https://www.flickr.com/photos/145373894@N07/31532628864/",
      "exif": {
-      "Camera": "Canon EOS 80D"
+      "Camera": "Canon EOS 80D",
+      "Lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "Exposure": "0.01 sec (1/100)",
+      "Aperture": "f/3.5",
+      "Focal length": "18 mm"
      },
-     "exif_line": "Canon EOS 80D",
+     "exif_line": "Canon EOS 80D \u00b7 EF-S18-55mm f/3.5-5.6 IS STM \u00b7 \u0192/3.5 \u00b7 0.01 sec (1/100) \u00b7 18 mm",
      "color": "#736156"
     },
     {
