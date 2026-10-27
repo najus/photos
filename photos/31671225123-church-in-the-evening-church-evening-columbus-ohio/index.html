@@ -12,13 +12,16 @@
 <meta property="og:image" content="https://live.staticflickr.com/479/31671225123_b4247cebd7_b.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>">
-<link rel="stylesheet" href="/assets/style.css?v=1">
+<link rel="stylesheet" href="/assets/style.css?v=2">
+<script>try{if(localStorage.getItem("photos-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 </head>
 <body>
 <header class="site-header">
   <a class="brand" href="/">Sujan Thapa <span>· Photos</span></a>
   <nav>
     <a href="/#albums">Albums</a>
+    <a href="/colour/">Colour</a>
+    <button id="themeBtn" class="theme-btn" type="button" aria-label="Toggle darkroom mode">🌑</button>
     <a href="https://sujanthapa.com">Main site</a>
     <a href="https://www.flickr.com/photos/145373894@N07/">Flickr</a>
     <a href="https://vsco.co/najus">VSCO</a>
@@ -44,11 +47,14 @@
   <p><a href="https://sujanthapa.com">sujanthapa.com</a> · <a href="https://www.flickr.com/photos/145373894@N07/">Flickr</a> · <a href="https://vsco.co/najus">VSCO</a></p>
 </footer>
 <div class="lightbox" id="lightbox" hidden>
+  <div class="lb-glow"></div>
+  <span class="lb-count"></span>
   <button class="lb-close" aria-label="Close">×</button>
   <button class="lb-prev" aria-label="Previous">‹</button>
-  <figure><img alt=""><figcaption></figcaption></figure>
+  <figure><img alt=""><figcaption><strong class="lb-title"></strong><span class="lb-exif"></span></figcaption></figure>
   <button class="lb-next" aria-label="Next">›</button>
+  <div class="lb-strip"></div>
 </div>
-<script src="/assets/gallery.js?v=1"></script>
+<script src="/assets/gallery.js?v=2"></script>
 </body>
 </html>

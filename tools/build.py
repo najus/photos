@@ -15,7 +15,9 @@ The key is the same (public, read-only) key the old site embedded in
 its JavaScript. In CI it is supplied from the FLICKR_API_KEY repo
 secret. Never hardcode a different/secret key here.
 """
+import colorsys
 import html
+import io
 import json
 import os
 import re
@@ -29,6 +31,44 @@ API = "https://api.flickr.com/services/rest/"
 USER_ID = "145373894@N07"  # sujanthapa
 SITE = "https://photos.sujanthapa.com"
 HERO_PHOTO_ID = "30582166924"  # "Focused on strings" — the old homepage hero
+# Story-hero rotation on the home page (experiment 01 from the demo).
+FEATURED_IDS = ["30582166924", "30790679834", "31278222750", "33442529120", "31671225123"]
+
+
+def dominant_color(url):
+    """Average colour of an image URL as #rrggbb, or '' if unavailable
+    (Pillow missing / fetch failed) — colour features degrade quietly."""
+    try:
+        from PIL import Image
+
+        with urllib.request.urlopen(url, timeout=20) as r:
+            im = Image.open(io.BytesIO(r.read())).convert("RGB").resize((24, 24))
+        px = list(im.getdata())
+        n = len(px)
+        return "#%02x%02x%02x" % (
+            sum(c[0] for c in px) // n,
+            sum(c[1] for c in px) // n,
+            sum(c[2] for c in px) // n,
+        )
+    except Exception:
+        return ""
+
+
+def exif_line(exif):
+    bits = []
+    if exif.get("Camera"):
+        bits.append(exif["Camera"])
+    if exif.get("Lens"):
+        bits.append(exif["Lens"])
+    if exif.get("Aperture"):
+        bits.append("ƒ/" + re.sub(r"[^0-9.]", "", exif["Aperture"]))
+    if exif.get("Exposure"):
+        bits.append(exif["Exposure"])
+    if exif.get("ISO"):
+        bits.append("ISO " + re.sub(r"[^0-9]", "", exif["ISO"]))
+    if exif.get("Focal length"):
+        bits.append(exif["Focal length"])
+    return " · ".join(bits)
 
 # Album order + slugs. New Flickr albums are picked up automatically
 # and appended after these, slugified from their title.
@@ -127,7 +167,9 @@ def fetch(key):
             ),
             "flickr_url": f"https://www.flickr.com/photos/{USER_ID}/{pid}/",
             "exif": exif_out,
+            "exif_line": exif_line(exif_out),
         }
+        photo["color"] = dominant_color(photo["thumb"]) if photo["thumb"] else ""
         all_photos[pid] = photo
         print(f"  {album_name}: {photo['title']} ({pid})", file=sys.stderr)
         return photo
@@ -190,13 +232,16 @@ def head(title, desc, image, path):
 <meta property="og:image" content="{html.escape(image)}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>">
-<link rel="stylesheet" href="/assets/style.css?v=1">
+<link rel="stylesheet" href="/assets/style.css?v=2">
+<script>try{{if(localStorage.getItem("photos-theme")==="dark")document.documentElement.dataset.theme="dark"}}catch(e){{}}</script>
 </head>
 <body>
 <header class="site-header">
   <a class="brand" href="/">Sujan Thapa <span>· Photos</span></a>
   <nav>
     <a href="/#albums">Albums</a>
+    <a href="/colour/">Colour</a>
+    <button id="themeBtn" class="theme-btn" type="button" aria-label="Toggle darkroom mode">🌑</button>
     <a href="https://sujanthapa.com">Main site</a>
     <a href="https://www.flickr.com/photos/{USER_ID}/">Flickr</a>
     <a href="https://vsco.co/najus">VSCO</a>
@@ -215,12 +260,15 @@ FOOT = """
   <p><a href="https://sujanthapa.com">sujanthapa.com</a> · <a href="https://www.flickr.com/photos/145373894@N07/">Flickr</a> · <a href="https://vsco.co/najus">VSCO</a></p>
 </footer>
 <div class="lightbox" id="lightbox" hidden>
+  <div class="lb-glow"></div>
+  <span class="lb-count"></span>
   <button class="lb-close" aria-label="Close">×</button>
   <button class="lb-prev" aria-label="Previous">‹</button>
-  <figure><img alt=""><figcaption></figcaption></figure>
+  <figure><img alt=""><figcaption><strong class="lb-title"></strong><span class="lb-exif"></span></figcaption></figure>
   <button class="lb-next" aria-label="Next">›</button>
+  <div class="lb-strip"></div>
 </div>
-<script src="/assets/gallery.js?v=1"></script>
+<script src="/assets/gallery.js?v=2"></script>
 </body>
 </html>
 """
@@ -234,26 +282,43 @@ def render(albums, all_photos):
         prim = next((p for p in a["photos"] if p["id"] == a["primary"]), a["photos"][0] if a["photos"] else None)
         covers[a["slug"]] = prim
 
-    # ---- home
-    album_cards = "\n".join(
-        f"""<a class="album-card" href="/albums/{a['slug']}/">
-      <img src="{covers[a['slug']]['thumb']}" alt="{html.escape(a['name'])}" loading="lazy" width="{covers[a['slug']]['thumb_w']}" height="{covers[a['slug']]['thumb_h']}">
-      <span class="album-meta"><strong>{html.escape(a['name'])}</strong><em>{a['count']} photos</em></span>
-    </a>"""
-        for a in albums
+    # ---- home: story hero (01) + editorial album index (02)
+    featured = [all_photos[i] for i in FEATURED_IDS if i in all_photos] or [hero]
+    story_json = json.dumps(
+        [
+            {
+                "large": p["large"],
+                "srcset": p["srcset"],
+                "title": p["title"],
+                "meta": p["album"] + ((" — " + p["exif_line"]) if p["exif_line"] else ""),
+                "href": f"/photos/{p['slug']}/",
+            }
+            for p in featured
+        ]
+    )
+    index_rows = "\n".join(
+        f"""<a class="index-row" href="/albums/{a['slug']}/" data-cover="{covers[a['slug']]['thumb']}">
+      <span class="no">{i + 1:02d}</span><span class="name">{html.escape(a['name'])}</span>
+      <span class="cnt">{a['count']} photos</span><span class="arr">→</span></a>"""
+        for i, a in enumerate(albums)
     )
     recent = sorted(all_photos.values(), key=lambda p: p["taken"], reverse=True)[:12]
     recent_figs = "\n".join(fig(p) for p in recent)
     home = (
         head("Sujan Thapa — Photos", f"Photography by Sujan Thapa — {total} photos in {len(albums)} albums.", hero["large"], "/")
         + f"""
-<section class="hero">
-  <img src="{hero['large']}" srcset="{hero['srcset']}" sizes="100vw" alt="{html.escape(hero['title'])}">
-  <div class="hero-text"><h1>Photos</h1><p>{total} photographs · {len(albums)} albums · shot on whatever was in my hand, now a Fujifilm X100VI</p></div>
+<section class="story" id="story">
+  <img id="storyImg" src="{featured[0]['large']}" srcset="{featured[0]['srcset']}" sizes="100vw" alt="{html.escape(featured[0]['title'])}">
+  <div class="story-shade"></div>
+  <div class="story-segs" id="storySegs"></div>
+  <div class="story-cap"><p class="story-kicker">Photos · {total} photographs · {len(albums)} albums</p><h1 id="storyTitle">{html.escape(featured[0]['title'])}</h1><p id="storyMeta"></p></div>
+  <span class="story-count" id="storyCount"></span>
 </section>
+<script>window.STORY = {story_json};</script>
 <section id="albums" class="wrap">
   <h2>Albums</h2>
-  <div class="album-grid">{album_cards}</div>
+  <div class="index-list">{index_rows}</div>
+  <div class="cursor-preview" id="cursorPreview"><img alt=""></div>
 </section>
 <section class="wrap">
   <h2>Most recent</h2>
@@ -263,8 +328,33 @@ def render(albums, all_photos):
     )
     write("index.html", home)
 
+    # ---- colour story page (06): whole archive sorted by dominant colour
+    def hue_key(p):
+        c = p.get("color") or "#000000"
+        r, g, b = (int(c[i : i + 2], 16) / 255 for i in (1, 3, 5))
+        h, s, v = colorsys.rgb_to_hsv(r, g, b)
+        return (h, v)
+
+    wall = "\n".join(
+        f"""<a href="/photos/{p['slug']}/" style="background:{p.get('color') or '#888'}" title="{html.escape(p['title'])} — {p.get('color') or ''}">
+      <img src="{p['thumb']}" alt="{html.escape(p['title'])}" loading="lazy"></a>"""
+        for p in sorted(all_photos.values(), key=hue_key)
+    )
+    colour_page = (
+        head("Colour — Sujan Thapa Photos", "The whole archive sorted by dominant colour.", hero["large"], "/colour/")
+        + f"""
+<section class="wrap">
+  <p class="crumb"><a href="/">Photos</a> / Colour</p>
+  <h1>Colour story</h1>
+  <p class="sub">All {total} photographs, sorted by their dominant colour. Hover a swatch to peek; click to open the photo.</p>
+  <div class="colour-wall">{wall}</div>
+</section>"""
+        + FOOT
+    )
+    write("colour/index.html", colour_page)
+
     # ---- album + photo pages
-    urls = ["/"]
+    urls = ["/", "/colour/"]
     rendered_photos = set()
     for a in albums:
         figs = "\n".join(fig(p) for p in a["photos"])
@@ -339,8 +429,8 @@ def render(albums, all_photos):
 
 
 def fig(p):
-    return f"""<figure class="cell">
-    <a href="/photos/{p['slug']}/" class="lb-item" data-large="{p['large']}" data-title="{html.escape(p['title'])}">
+    return f"""<figure class="cell" style="background:{p.get('color') or '#ddd'}">
+    <a href="/photos/{p['slug']}/" class="lb-item" data-large="{p['large']}" data-title="{html.escape(p['title'])}" data-exif="{html.escape(p['exif_line'])}" data-color="{p.get('color') or ''}" data-album="{html.escape(p['album'])}">
       <img src="{p['thumb']}" srcset="{p['srcset']}" sizes="(max-width: 700px) 50vw, 400px" alt="{html.escape(p['title'])}" loading="lazy" width="{p['thumb_w']}" height="{p['thumb_h']}">
     </a>
     <figcaption>{html.escape(p['title'])}</figcaption>

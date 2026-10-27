@@ -12,13 +12,16 @@
 <meta property="og:image" content="https://live.staticflickr.com/5740/30582166924_7477c9f722_b.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>">
-<link rel="stylesheet" href="/assets/style.css?v=1">
+<link rel="stylesheet" href="/assets/style.css?v=2">
+<script>try{if(localStorage.getItem("photos-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 </head>
 <body>
 <header class="site-header">
   <a class="brand" href="/">Sujan Thapa <span>· Photos</span></a>
   <nav>
     <a href="/#albums">Albums</a>
+    <a href="/colour/">Colour</a>
+    <button id="themeBtn" class="theme-btn" type="button" aria-label="Toggle darkroom mode">🌑</button>
     <a href="https://sujanthapa.com">Main site</a>
     <a href="https://www.flickr.com/photos/145373894@N07/">Flickr</a>
     <a href="https://vsco.co/najus">VSCO</a>
@@ -27,103 +30,103 @@
 </header>
 <main>
 
-<section class="hero">
-  <img src="https://live.staticflickr.com/5740/30582166924_7477c9f722_b.jpg" srcset="https://live.staticflickr.com/5740/30582166924_7477c9f722_n.jpg 320w, https://live.staticflickr.com/5740/30582166924_7477c9f722.jpg 500w, https://live.staticflickr.com/5740/30582166924_7477c9f722_z.jpg 640w, https://live.staticflickr.com/5740/30582166924_7477c9f722_b.jpg 1024w" sizes="100vw" alt="Focused on strings">
-  <div class="hero-text"><h1>Photos</h1><p>90 photographs · 5 albums · shot on whatever was in my hand, now a Fujifilm X100VI</p></div>
+<section class="story" id="story">
+  <img id="storyImg" src="https://live.staticflickr.com/5740/30582166924_7477c9f722_b.jpg" srcset="https://live.staticflickr.com/5740/30582166924_7477c9f722_n.jpg 320w, https://live.staticflickr.com/5740/30582166924_7477c9f722.jpg 500w, https://live.staticflickr.com/5740/30582166924_7477c9f722_z.jpg 640w, https://live.staticflickr.com/5740/30582166924_7477c9f722_b.jpg 1024w" sizes="100vw" alt="Focused on strings">
+  <div class="story-shade"></div>
+  <div class="story-segs" id="storySegs"></div>
+  <div class="story-cap"><p class="story-kicker">Photos · 90 photographs · 5 albums</p><h1 id="storyTitle">Focused on strings</h1><p id="storyMeta"></p></div>
+  <span class="story-count" id="storyCount"></span>
 </section>
+<script>window.STORY = [{"large": "https://live.staticflickr.com/5740/30582166924_7477c9f722_b.jpg", "srcset": "https://live.staticflickr.com/5740/30582166924_7477c9f722_n.jpg 320w, https://live.staticflickr.com/5740/30582166924_7477c9f722.jpg 500w, https://live.staticflickr.com/5740/30582166924_7477c9f722_z.jpg 640w, https://live.staticflickr.com/5740/30582166924_7477c9f722_b.jpg 1024w", "title": "Focused on strings", "meta": "Miscellaneous \u2014 Canon EOS 80D \u00b7 EF-S18-55mm f/3.5-5.6 IS STM \u00b7 \u0192/5.6 \u00b7 0.033 sec (1/30) \u00b7 55 mm", "href": "/photos/30582166924-focused-on-strings/"}, {"large": "https://live.staticflickr.com/523/30790679834_cb8f6b60ee_b.jpg", "srcset": "https://live.staticflickr.com/523/30790679834_cb8f6b60ee_n.jpg 320w, https://live.staticflickr.com/523/30790679834_cb8f6b60ee.jpg 500w, https://live.staticflickr.com/523/30790679834_cb8f6b60ee_z.jpg 640w, https://live.staticflickr.com/523/30790679834_cb8f6b60ee_b.jpg 1024w", "title": "Winter light", "meta": "Nature \u2014 Canon EOS 80D \u00b7 EF-S18-55mm f/3.5-5.6 IS STM \u00b7 \u0192/4.0 \u00b7 0.013 sec (1/80) \u00b7 27 mm", "href": "/photos/30790679834-winter-light/"}, {"large": "https://live.staticflickr.com/373/31278222750_09c217920e_b.jpg", "srcset": "https://live.staticflickr.com/373/31278222750_09c217920e_n.jpg 320w, https://live.staticflickr.com/373/31278222750_09c217920e.jpg 500w, https://live.staticflickr.com/373/31278222750_09c217920e_z.jpg 640w, https://live.staticflickr.com/373/31278222750_09c217920e_b.jpg 1024w", "title": "Sky scrapers", "meta": "Architecture", "href": "/photos/31278222750-sky-scrapers/"}, {"large": "https://live.staticflickr.com/3854/33442529120_da5fe64e42_b.jpg", "srcset": "https://live.staticflickr.com/3854/33442529120_da5fe64e42_n.jpg 240w, https://live.staticflickr.com/3854/33442529120_da5fe64e42.jpg 375w, https://live.staticflickr.com/3854/33442529120_da5fe64e42_z.jpg 480w, https://live.staticflickr.com/3854/33442529120_da5fe64e42_b.jpg 768w", "title": "Glass full of nature", "meta": "Nature \u2014 Huawei Nexus 6P \u00b7 \u0192/2.0 \u00b7 0.013 sec (1/79) \u00b7 4.7 mm", "href": "/photos/33442529120-glass-full-of-nature/"}, {"large": "https://live.staticflickr.com/479/31671225123_b4247cebd7_b.jpg", "srcset": "https://live.staticflickr.com/479/31671225123_b4247cebd7_n.jpg 320w, https://live.staticflickr.com/479/31671225123_b4247cebd7.jpg 500w, https://live.staticflickr.com/479/31671225123_b4247cebd7_z.jpg 640w, https://live.staticflickr.com/479/31671225123_b4247cebd7_b.jpg 1024w", "title": "Church in the evening #church #evening #columbus #ohio", "meta": "Unfiled", "href": "/photos/31671225123-church-in-the-evening-church-evening-columbus-ohio/"}];</script>
 <section id="albums" class="wrap">
   <h2>Albums</h2>
-  <div class="album-grid"><a class="album-card" href="/albums/airplanes/">
-      <img src="https://live.staticflickr.com/700/31564778293_88785ca0e4.jpg" alt="Airplanes" loading="lazy" width="500" height="333">
-      <span class="album-meta"><strong>Airplanes</strong><em>56 photos</em></span>
-    </a>
-<a class="album-card" href="/albums/nature/">
-      <img src="https://live.staticflickr.com/624/31381128260_e0ef5d2b60.jpg" alt="Nature" loading="lazy" width="500" height="374">
-      <span class="album-meta"><strong>Nature</strong><em>13 photos</em></span>
-    </a>
-<a class="album-card" href="/albums/architecture/">
-      <img src="https://live.staticflickr.com/750/30923964293_74d3fabde4.jpg" alt="Architecture" loading="lazy" width="500" height="374">
-      <span class="album-meta"><strong>Architecture</strong><em>4 photos</em></span>
-    </a>
-<a class="album-card" href="/albums/miscellaneous/">
-      <img src="https://live.staticflickr.com/401/31381225050_e1978b838d.jpg" alt="Miscellaneous" loading="lazy" width="500" height="374">
-      <span class="album-meta"><strong>Miscellaneous</strong><em>15 photos</em></span>
-    </a>
-<a class="album-card" href="/albums/unfiled/">
-      <img src="https://live.staticflickr.com/3681/33465328305_a3e1c6135c.jpg" alt="Unfiled" loading="lazy" width="500" height="349">
-      <span class="album-meta"><strong>Unfiled</strong><em>4 photos</em></span>
-    </a></div>
+  <div class="index-list"><a class="index-row" href="/albums/airplanes/" data-cover="https://live.staticflickr.com/700/31564778293_88785ca0e4.jpg">
+      <span class="no">01</span><span class="name">Airplanes</span>
+      <span class="cnt">56 photos</span><span class="arr">→</span></a>
+<a class="index-row" href="/albums/nature/" data-cover="https://live.staticflickr.com/624/31381128260_e0ef5d2b60.jpg">
+      <span class="no">02</span><span class="name">Nature</span>
+      <span class="cnt">13 photos</span><span class="arr">→</span></a>
+<a class="index-row" href="/albums/architecture/" data-cover="https://live.staticflickr.com/750/30923964293_74d3fabde4.jpg">
+      <span class="no">03</span><span class="name">Architecture</span>
+      <span class="cnt">4 photos</span><span class="arr">→</span></a>
+<a class="index-row" href="/albums/miscellaneous/" data-cover="https://live.staticflickr.com/401/31381225050_e1978b838d.jpg">
+      <span class="no">04</span><span class="name">Miscellaneous</span>
+      <span class="cnt">15 photos</span><span class="arr">→</span></a>
+<a class="index-row" href="/albums/unfiled/" data-cover="https://live.staticflickr.com/3681/33465328305_a3e1c6135c.jpg">
+      <span class="no">05</span><span class="name">Unfiled</span>
+      <span class="cnt">4 photos</span><span class="arr">→</span></a></div>
+  <div class="cursor-preview" id="cursorPreview"><img alt=""></div>
 </section>
 <section class="wrap">
   <h2>Most recent</h2>
-  <div class="grid"><figure class="cell">
-    <a href="/photos/33442529120-glass-full-of-nature/" class="lb-item" data-large="https://live.staticflickr.com/3854/33442529120_da5fe64e42_b.jpg" data-title="Glass full of nature">
+  <div class="grid"><figure class="cell" style="background:#d5d5d5">
+    <a href="/photos/33442529120-glass-full-of-nature/" class="lb-item" data-large="https://live.staticflickr.com/3854/33442529120_da5fe64e42_b.jpg" data-title="Glass full of nature" data-exif="Huawei Nexus 6P · ƒ/2.0 · 0.013 sec (1/79) · 4.7 mm" data-color="#d5d5d5" data-album="Nature">
       <img src="https://live.staticflickr.com/3854/33442529120_da5fe64e42.jpg" srcset="https://live.staticflickr.com/3854/33442529120_da5fe64e42_n.jpg 240w, https://live.staticflickr.com/3854/33442529120_da5fe64e42.jpg 375w, https://live.staticflickr.com/3854/33442529120_da5fe64e42_z.jpg 480w, https://live.staticflickr.com/3854/33442529120_da5fe64e42_b.jpg 768w" sizes="(max-width: 700px) 50vw, 400px" alt="Glass full of nature" loading="lazy" width="375" height="500">
     </a>
     <figcaption>Glass full of nature</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/33361209260-flying-high-birds/" class="lb-item" data-large="https://live.staticflickr.com/2944/33361209260_4d6aabc5eb_b.jpg" data-title="Flying high #birds">
+<figure class="cell" style="background:#366396">
+    <a href="/photos/33361209260-flying-high-birds/" class="lb-item" data-large="https://live.staticflickr.com/2944/33361209260_4d6aabc5eb_b.jpg" data-title="Flying high #birds" data-exif="Canon EOS 80D · EF-S55-250mm f/4-5.6 IS STM · ƒ/5.6 · 0.001 sec (1/800) · 250 mm" data-color="#366396" data-album="Nature">
       <img src="https://live.staticflickr.com/2944/33361209260_4d6aabc5eb.jpg" srcset="https://live.staticflickr.com/2944/33361209260_4d6aabc5eb_n.jpg 320w, https://live.staticflickr.com/2944/33361209260_4d6aabc5eb.jpg 500w, https://live.staticflickr.com/2944/33361209260_4d6aabc5eb_z.jpg 640w, https://live.staticflickr.com/2944/33361209260_4d6aabc5eb_b.jpg 1024w" sizes="(max-width: 700px) 50vw, 400px" alt="Flying high #birds" loading="lazy" width="500" height="333">
     </a>
     <figcaption>Flying high #birds</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/33465328305-wine-glasses-when-not-in-use-wine-glass-bokeh/" class="lb-item" data-large="https://live.staticflickr.com/3681/33465328305_a3e1c6135c_b.jpg" data-title="Wine glasses when not in use #wine #glass #bokeh">
+<figure class="cell" style="background:#745f49">
+    <a href="/photos/33465328305-wine-glasses-when-not-in-use-wine-glass-bokeh/" class="lb-item" data-large="https://live.staticflickr.com/3681/33465328305_a3e1c6135c_b.jpg" data-title="Wine glasses when not in use #wine #glass #bokeh" data-exif="Canon EOS 80D · EF50mm f/1.8 STM · ƒ/2.5 · 0.013 sec (1/80) · 50 mm" data-color="#745f49" data-album="Unfiled">
       <img src="https://live.staticflickr.com/3681/33465328305_a3e1c6135c.jpg" srcset="https://live.staticflickr.com/3681/33465328305_a3e1c6135c_n.jpg 320w, https://live.staticflickr.com/3681/33465328305_a3e1c6135c.jpg 500w, https://live.staticflickr.com/3681/33465328305_a3e1c6135c_z.jpg 640w, https://live.staticflickr.com/3681/33465328305_a3e1c6135c_b.jpg 1024w" sizes="(max-width: 700px) 50vw, 400px" alt="Wine glasses when not in use #wine #glass #bokeh" loading="lazy" width="500" height="349">
     </a>
     <figcaption>Wine glasses when not in use #wine #glass #bokeh</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/33399126225-into-the-woods/" class="lb-item" data-large="https://live.staticflickr.com/3794/33399126225_40f37549b4_b.jpg" data-title="Into the woods">
+<figure class="cell" style="background:#6c6c6c">
+    <a href="/photos/33399126225-into-the-woods/" class="lb-item" data-large="https://live.staticflickr.com/3794/33399126225_40f37549b4_b.jpg" data-title="Into the woods" data-exif="Huawei Nexus 6P · ƒ/2.0 · 0.005 sec (1/198) · 4.7 mm" data-color="#6c6c6c" data-album="Nature">
       <img src="https://live.staticflickr.com/3794/33399126225_40f37549b4.jpg" srcset="https://live.staticflickr.com/3794/33399126225_40f37549b4_n.jpg 240w, https://live.staticflickr.com/3794/33399126225_40f37549b4.jpg 375w, https://live.staticflickr.com/3794/33399126225_40f37549b4_z.jpg 480w, https://live.staticflickr.com/3794/33399126225_40f37549b4_b.jpg 768w" sizes="(max-width: 700px) 50vw, 400px" alt="Into the woods" loading="lazy" width="375" height="500">
     </a>
     <figcaption>Into the woods</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/32931149170-staring-at-the-phone-blackandwhitephotography-amateurs-bnw-bnw-captures-world-bnw-bnw-life-ae-bnw-bnw-society-top-bnw-bnw-demand-superstarz-bw-bnw-planet-focalmarked-lines-abstracto-abstractart-abstractexpressionism-modernart-expression/" class="lb-item" data-large="https://live.staticflickr.com/634/32931149170_c7acf78f2e_b.jpg" data-title="Staring at the phone #blackandwhitephotography #amateurs_bnw #bnw_captures #world_bnw #bnw_life #ae_bnw #bnw_society #top_bnw #bnw_demand #superstarz_bw #bnw_planet #focalmarked  #lines #abstracto #abstractart #abstractexpressionism #modernart #expression">
+<figure class="cell" style="background:#1a1a1a">
+    <a href="/photos/32931149170-staring-at-the-phone-blackandwhitephotography-amateurs-bnw-bnw-captures-world-bnw-bnw-life-ae-bnw-bnw-society-top-bnw-bnw-demand-superstarz-bw-bnw-planet-focalmarked-lines-abstracto-abstractart-abstractexpressionism-modernart-expression/" class="lb-item" data-large="https://live.staticflickr.com/634/32931149170_c7acf78f2e_b.jpg" data-title="Staring at the phone #blackandwhitephotography #amateurs_bnw #bnw_captures #world_bnw #bnw_life #ae_bnw #bnw_society #top_bnw #bnw_demand #superstarz_bw #bnw_planet #focalmarked  #lines #abstracto #abstractart #abstractexpressionism #modernart #expression" data-exif="Canon EOS 80D · EF50mm f/1.8 STM · ƒ/2.5 · 0.1 sec (1/10) · 50 mm" data-color="#1a1a1a" data-album="Miscellaneous">
       <img src="https://live.staticflickr.com/634/32931149170_c7acf78f2e.jpg" srcset="https://live.staticflickr.com/634/32931149170_c7acf78f2e_n.jpg 320w, https://live.staticflickr.com/634/32931149170_c7acf78f2e.jpg 500w, https://live.staticflickr.com/634/32931149170_c7acf78f2e_z.jpg 640w, https://live.staticflickr.com/634/32931149170_c7acf78f2e_b.jpg 1024w" sizes="(max-width: 700px) 50vw, 400px" alt="Staring at the phone #blackandwhitephotography #amateurs_bnw #bnw_captures #world_bnw #bnw_life #ae_bnw #bnw_society #top_bnw #bnw_demand #superstarz_bw #bnw_planet #focalmarked  #lines #abstracto #abstractart #abstractexpressionism #modernart #expression" loading="lazy" width="500" height="333">
     </a>
     <figcaption>Staring at the phone #blackandwhitephotography #amateurs_bnw #bnw_captures #world_bnw #bnw_life #ae_bnw #bnw_society #top_bnw #bnw_demand #superstarz_bw #bnw_planet #focalmarked  #lines #abstracto #abstractart #abstractexpressionism #modernart #expression</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/33034256862-50mm-canon-prime-bokeh/" class="lb-item" data-large="https://live.staticflickr.com/726/33034256862_7a32af5d88_b.jpg" data-title="50mm canon prime #bokeh">
+<figure class="cell" style="background:#cfcfcf">
+    <a href="/photos/33034256862-50mm-canon-prime-bokeh/" class="lb-item" data-large="https://live.staticflickr.com/726/33034256862_7a32af5d88_b.jpg" data-title="50mm canon prime #bokeh" data-exif="Canon EOS 80D · EF-S55-250mm f/4-5.6 IS STM · ƒ/5.0 · 0.017 sec (1/60) · 135 mm" data-color="#cfcfcf" data-album="Unfiled">
       <img src="https://live.staticflickr.com/726/33034256862_7a32af5d88.jpg" srcset="https://live.staticflickr.com/726/33034256862_7a32af5d88_n.jpg 320w, https://live.staticflickr.com/726/33034256862_7a32af5d88.jpg 500w, https://live.staticflickr.com/726/33034256862_7a32af5d88_z.jpg 640w, https://live.staticflickr.com/726/33034256862_7a32af5d88_b.jpg 1024w" sizes="(max-width: 700px) 50vw, 400px" alt="50mm canon prime #bokeh" loading="lazy" width="500" height="483">
     </a>
     <figcaption>50mm canon prime #bokeh</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/32962466455-nexus-6p/" class="lb-item" data-large="https://live.staticflickr.com/669/32962466455_87c92236a9_b.jpg" data-title="Nexus 6P">
+<figure class="cell" style="background:#848381">
+    <a href="/photos/32962466455-nexus-6p/" class="lb-item" data-large="https://live.staticflickr.com/669/32962466455_87c92236a9_b.jpg" data-title="Nexus 6P" data-exif="Canon EOS 80D · EF50mm f/1.8 STM · ƒ/2.2 · 0.02 sec (1/50) · 50 mm" data-color="#848381" data-album="Unfiled">
       <img src="https://live.staticflickr.com/669/32962466455_87c92236a9.jpg" srcset="https://live.staticflickr.com/669/32962466455_87c92236a9_n.jpg 320w, https://live.staticflickr.com/669/32962466455_87c92236a9.jpg 500w, https://live.staticflickr.com/669/32962466455_87c92236a9_z.jpg 640w, https://live.staticflickr.com/669/32962466455_87c92236a9_b.jpg 1024w" sizes="(max-width: 700px) 50vw, 400px" alt="Nexus 6P" loading="lazy" width="500" height="333">
     </a>
     <figcaption>Nexus 6P</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/32003919844-pine-cones/" class="lb-item" data-large="https://live.staticflickr.com/293/32003919844_dcf9841473_b.jpg" data-title="Pine Cones">
+<figure class="cell" style="background:#a19895">
+    <a href="/photos/32003919844-pine-cones/" class="lb-item" data-large="https://live.staticflickr.com/293/32003919844_dcf9841473_b.jpg" data-title="Pine Cones" data-exif="Canon EOS 80D · EF-S18-55mm f/3.5-5.6 IS STM · ƒ/6.3 · 0.033 sec (1/30) · 55 mm" data-color="#a19895" data-album="Miscellaneous">
       <img src="https://live.staticflickr.com/293/32003919844_dcf9841473.jpg" srcset="https://live.staticflickr.com/293/32003919844_dcf9841473_n.jpg 320w, https://live.staticflickr.com/293/32003919844_dcf9841473.jpg 500w, https://live.staticflickr.com/293/32003919844_dcf9841473_z.jpg 640w, https://live.staticflickr.com/293/32003919844_dcf9841473_b.jpg 1024w" sizes="(max-width: 700px) 50vw, 400px" alt="Pine Cones" loading="lazy" width="500" height="333">
     </a>
     <figcaption>Pine Cones</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/31671225123-church-in-the-evening-church-evening-columbus-ohio/" class="lb-item" data-large="https://live.staticflickr.com/479/31671225123_b4247cebd7_b.jpg" data-title="Church in the evening #church #evening #columbus #ohio">
+<figure class="cell" style="background:#8c8895">
+    <a href="/photos/31671225123-church-in-the-evening-church-evening-columbus-ohio/" class="lb-item" data-large="https://live.staticflickr.com/479/31671225123_b4247cebd7_b.jpg" data-title="Church in the evening #church #evening #columbus #ohio" data-exif="" data-color="#8c8895" data-album="Unfiled">
       <img src="https://live.staticflickr.com/479/31671225123_b4247cebd7.jpg" srcset="https://live.staticflickr.com/479/31671225123_b4247cebd7_n.jpg 320w, https://live.staticflickr.com/479/31671225123_b4247cebd7.jpg 500w, https://live.staticflickr.com/479/31671225123_b4247cebd7_z.jpg 640w, https://live.staticflickr.com/479/31671225123_b4247cebd7_b.jpg 1024w" sizes="(max-width: 700px) 50vw, 400px" alt="Church in the evening #church #evening #columbus #ohio" loading="lazy" width="500" height="500">
     </a>
     <figcaption>Church in the evening #church #evening #columbus #ohio</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/32375161905-img-0335/" class="lb-item" data-large="https://live.staticflickr.com/511/32375161905_3c878b8bbc_b.jpg" data-title="IMG_0335">
+<figure class="cell" style="background:#a5a098">
+    <a href="/photos/32375161905-img-0335/" class="lb-item" data-large="https://live.staticflickr.com/511/32375161905_3c878b8bbc_b.jpg" data-title="IMG_0335" data-exif="Canon EOS 80D · EF-S18-55mm f/3.5-5.6 IS STM · ƒ/3.5 · 0.006 sec (1/160) · 18 mm" data-color="#a5a098" data-album="Airplanes">
       <img src="https://live.staticflickr.com/511/32375161905_3c878b8bbc.jpg" srcset="https://live.staticflickr.com/511/32375161905_3c878b8bbc_n.jpg 320w, https://live.staticflickr.com/511/32375161905_3c878b8bbc.jpg 500w, https://live.staticflickr.com/511/32375161905_3c878b8bbc_z.jpg 640w, https://live.staticflickr.com/511/32375161905_3c878b8bbc_b.jpg 1024w" sizes="(max-width: 700px) 50vw, 400px" alt="IMG_0335" loading="lazy" width="500" height="333">
     </a>
     <figcaption>IMG_0335</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/32336090836-img-0333/" class="lb-item" data-large="https://live.staticflickr.com/322/32336090836_53080e63e4_b.jpg" data-title="IMG_0333">
+<figure class="cell" style="background:#979797">
+    <a href="/photos/32336090836-img-0333/" class="lb-item" data-large="https://live.staticflickr.com/322/32336090836_53080e63e4_b.jpg" data-title="IMG_0333" data-exif="Canon EOS 80D · EF-S18-55mm f/3.5-5.6 IS STM · ƒ/3.5 · 0.017 sec (1/60) · 18 mm" data-color="#979797" data-album="Airplanes">
       <img src="https://live.staticflickr.com/322/32336090836_53080e63e4.jpg" srcset="https://live.staticflickr.com/322/32336090836_53080e63e4_n.jpg 320w, https://live.staticflickr.com/322/32336090836_53080e63e4.jpg 500w, https://live.staticflickr.com/322/32336090836_53080e63e4_z.jpg 640w, https://live.staticflickr.com/322/32336090836_53080e63e4_b.jpg 1024w" sizes="(max-width: 700px) 50vw, 400px" alt="IMG_0333" loading="lazy" width="500" height="333">
     </a>
     <figcaption>IMG_0333</figcaption>
   </figure>
-<figure class="cell">
-    <a href="/photos/31564267353-img-0330/" class="lb-item" data-large="https://live.staticflickr.com/698/31564267353_3275218df6_b.jpg" data-title="IMG_0330">
+<figure class="cell" style="background:#cbc5bf">
+    <a href="/photos/31564267353-img-0330/" class="lb-item" data-large="https://live.staticflickr.com/698/31564267353_3275218df6_b.jpg" data-title="IMG_0330" data-exif="Canon EOS 80D · EF-S18-55mm f/3.5-5.6 IS STM · ƒ/4.0 · 0.008 sec (1/125) · 27 mm" data-color="#cbc5bf" data-album="Airplanes">
       <img src="https://live.staticflickr.com/698/31564267353_3275218df6.jpg" srcset="https://live.staticflickr.com/698/31564267353_3275218df6_n.jpg 320w, https://live.staticflickr.com/698/31564267353_3275218df6.jpg 500w, https://live.staticflickr.com/698/31564267353_3275218df6_z.jpg 640w, https://live.staticflickr.com/698/31564267353_3275218df6_b.jpg 1024w" sizes="(max-width: 700px) 50vw, 400px" alt="IMG_0330" loading="lazy" width="500" height="333">
     </a>
     <figcaption>IMG_0330</figcaption>
@@ -136,11 +139,14 @@
   <p><a href="https://sujanthapa.com">sujanthapa.com</a> · <a href="https://www.flickr.com/photos/145373894@N07/">Flickr</a> · <a href="https://vsco.co/najus">VSCO</a></p>
 </footer>
 <div class="lightbox" id="lightbox" hidden>
+  <div class="lb-glow"></div>
+  <span class="lb-count"></span>
   <button class="lb-close" aria-label="Close">×</button>
   <button class="lb-prev" aria-label="Previous">‹</button>
-  <figure><img alt=""><figcaption></figcaption></figure>
+  <figure><img alt=""><figcaption><strong class="lb-title"></strong><span class="lb-exif"></span></figcaption></figure>
   <button class="lb-next" aria-label="Next">›</button>
+  <div class="lb-strip"></div>
 </div>
-<script src="/assets/gallery.js?v=1"></script>
+<script src="/assets/gallery.js?v=2"></script>
 </body>
 </html>

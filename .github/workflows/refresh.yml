@@ -21,6 +21,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install Pillow (dominant-colour extraction)
+        run: pip install pillow
       - name: Rebuild from Flickr
         env:
           FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
