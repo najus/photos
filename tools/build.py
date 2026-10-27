@@ -321,7 +321,9 @@ def render(albums, all_photos):
 
     # ---- manifest, sitemap, robots
     manifest = {
-        "generated": datetime.utcnow().isoformat() + "Z",
+        # No timestamp here on purpose: identical Flickr data must
+        # produce an identical file, so the refresh Action can tell
+        # "nothing changed" and skip committing.
         "source": "Flickr",
         "user_id": USER_ID,
         "total_photos": total,
