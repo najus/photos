@@ -234,6 +234,14 @@ def head(title, desc, image, path):
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>">
 <link rel="stylesheet" href="/assets/style.css?v=2">
 <script>try{{if(localStorage.getItem("photos-theme")==="dark")document.documentElement.dataset.theme="dark"}}catch(e){{}}</script>
+<!-- Google tag (gtag.js) — same GA4 property as sujanthapa.com -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7SYMRHWQ73"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){{dataLayer.push(arguments);}}
+gtag('js', new Date());
+gtag('config', 'G-7SYMRHWQ73');
+</script>
 </head>
 <body>
 <header class="site-header">
